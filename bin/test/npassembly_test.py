@@ -1,34 +1,22 @@
 import testbook
 import os
-import svgwrite
-import png
+from datetime import datetime
+
+DEFAULT_NPCHARGE = -1000
+DEFAULT_LIGAND = 50
+DEFAULT_SALT = 0.175
 
 @testbook.testbook('npassemblylab-frontend.ipynb', execute=True)
-def test_combine_4_PNGs(tb):
-    f = open('test/resources/test.png', 'wb')  # binary mode is important
-    w = png.Writer(256, 1, greyscale=True)
-    w.write(f, [range(256)])
-    f.close()
-    if not os.path.exists('snapshot_png'):
-        os.mkdir("snapshot_png")
-
-    func = tb.ref("combine_4_PNGs")
-    func("test/resources/test.png", "test/resources/test.png", "test/resources/test.png", "test/resources/test.png", "test/resources/output.png")
-    assert os.path.exists("test/resources/output.png") == 1
-    os.remove("test/resources/output.png")
-
-@testbook.testbook('npassemblylab-frontend.ipynb', execute=True)
-def test_convert_SVG_PNG(tb):
-    func = tb.ref("convert_SVG_PNG")
-
-    dwg = svgwrite.Drawing('test/resources/test.svg', profile='tiny', size=(270, 270))
-    dwg.add(dwg.line((0, 0), (10, 0), stroke=svgwrite.rgb(10, 10, 16, '%')))
-    dwg.add(dwg.text('Test', insert=(0, 0.2), fill='red'))
-    dwg.save()
-    if not os.path.exists('snapshot_png'):
-        os.mkdir("snapshot_png")
-
-    func("test/resources/test.svg", "test/resources/output.png")
-    assert os.path.exists("test/resources/output.png") == 1
-    os.remove("test/resources/output.png")
-
+def test_runPreprocessor(tb):
+    t0 = datetime.now()
+    func = tb.ref("runPreprocessor")
+    func(DEFAULT_NPCHARGE, DEFAULT_LIGAND, DEFAULT_SALT)
+    logf = "test/preprocessor.log"
+    lammpsf = "test/in.lammps"
+    assert os.path.exists(logf) == 1
+    assert os.path.exists(lammpsf) == 1
+    t1 = os.path.getmtime("logf")
+    t2 = os.path.getmtime(lammpsf)
+    assert (t1>t0 and t2>t0)
+    os.remove(logf)
+    os.remove(lammpsf)
