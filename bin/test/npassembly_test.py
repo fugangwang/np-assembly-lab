@@ -3,7 +3,7 @@ import os
 import svgwrite
 import png
 
-@testbook.testbook('npshape-frontend.ipynb', execute=True)
+@testbook.testbook('npassemblylab-frontend.ipynb', execute=True)
 def test_combine_4_PNGs(tb):
     f = open('test/resources/test.png', 'wb')  # binary mode is important
     w = png.Writer(256, 1, greyscale=True)
@@ -17,7 +17,7 @@ def test_combine_4_PNGs(tb):
     assert os.path.exists("test/resources/output.png") == 1
     os.remove("test/resources/output.png")
 
-@testbook.testbook('npshape-frontend.ipynb', execute=True)
+@testbook.testbook('npassemblylab-frontend.ipynb', execute=True)
 def test_convert_SVG_PNG(tb):
     func = tb.ref("convert_SVG_PNG")
 
