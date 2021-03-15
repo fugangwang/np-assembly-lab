@@ -11,8 +11,8 @@ def test_runPreprocessor(tb):
     t0 = datetime.now()
     func = tb.ref("runPreprocessor")
     func(DEFAULT_NPCHARGE, DEFAULT_LIGAND, DEFAULT_SALT)
-    logf = "test/preprocessor.log"
-    lammpsf = "test/in.lammps"
+    logf = "preprocessor.log"
+    lammpsf = "in.lammps"
     assert os.path.exists(logf) == 1
     assert os.path.exists(lammpsf) == 1
     t1 = os.path.getmtime("logf")
