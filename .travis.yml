@@ -19,10 +19,13 @@ before_install:
   - cp /var/cache/apt/archives/*.deb $HOME/.cache/apt/
   - export BOOST_LIBDIR=/usr/lib/x86_64-linux-gnu/
   - rm Gemfile.lock
-  - sed 's/%use/#%use/' bin/npassemblylab-frontend.ipynb
 
 jobs:
   include:
+    - stage: test prep
+      script:
+        - sed -i 's/%use/#%use/' bin/npassemblylab-frontend.ipynb
+      name: test prep
     - stage: unit test
       script:
         - make all
