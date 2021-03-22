@@ -22,12 +22,10 @@ before_install:
 
 jobs:
   include:
-    - stage: test prep
-      script:
-        - sed -i 's/%use/#%use/' bin/npassemblylab-frontend.ipynb
-      name: test prep
     - stage: unit test
       script:
+        - sed -i 's/%use/#%use/' bin/npassemblylab-frontend.ipynb
+        - sed -i 's/0000/000/' bin/infiles/in.lammps.template
         - make all
         - cd bin && ./test.sh
       name: unit test
