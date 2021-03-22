@@ -23,7 +23,8 @@ def test_runPreprocessor(tb):
     os.remove(lammpsf)
 
 def test_backend():
-    runret = subprocess.getoutput("make run-preprocessor && make run-local-serial")
-    mk1 = "Loop time" #mk1 = "Total # of neighbors"
-    mk2 = "Performance" #mk2 = "Ave neighs/atom"
-    assert ((mk1 in runret) and (mk2 in runret))
+    retcode, retstr = subprocess.getstatusoutput("make run-preprocessor && make run-local-serial")
+    assert (retcode == 0)
+    #mk1 = "Total # of neighbors"
+    #mk2 = "Ave neighs/atom"
+    #assert ((mk1 in runret) and (mk2 in runret))
