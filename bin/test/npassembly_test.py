@@ -23,11 +23,8 @@ def test_runPreprocessor(tb):
     os.remove(lammpsf)
 
 def test_backend():
-    retcode, retstr = subprocess.getstatusoutput("make -f ../../Makefile local-run")
+    retcode, retstr = subprocess.getstatusoutput("make run-preprocessor && lmp < in.lammps")
     assert (retcode == 0)
-
-    #retcode, retstr = subprocess.getstatusoutput("make -C . run-preprocessor && make -C . run-local-serial")
-    #assert (retcode == 0)
     #mk1 = "Total # of neighbors"
     #mk2 = "Ave neighs/atom"
     #assert ((mk1 in runret) and (mk2 in runret))
