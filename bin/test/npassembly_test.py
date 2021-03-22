@@ -1,6 +1,7 @@
 import testbook
 import os
 from datetime import datetime
+import subprocess
 
 DEFAULT_NPCHARGE = -1000
 DEFAULT_LIGAND = 50
@@ -20,3 +21,9 @@ def test_runPreprocessor(tb):
     assert (t1>t0 and t2>t0)
     os.remove(logf)
     os.remove(lammpsf)
+
+def test_backend():
+    runret = subprocess.getoutput("make run-preprocessor && make run-local-serial")
+    mk1 = "Total # of neighbors"
+    mk2 = "Ave neighs/atom"
+    assert ((mk1 in runret) and (mk2 in runret))
