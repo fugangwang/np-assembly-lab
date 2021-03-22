@@ -22,6 +22,7 @@ def test_runPreprocessor(tb):
     os.remove(logf)
     os.remove(lammpsf)
 
+'''
 def test_backend():
     retcode1, retstr = subprocess.getstatusoutput("make run-preprocessor")
     assert (retcode1 == 0)
@@ -31,4 +32,4 @@ def test_backend():
     mk1 = "Total # of neighbors"
     mk2 = "Ave neighs/atom"
     assert ((mk1 in retstr) and (mk2 in retstr))
-
+'''
