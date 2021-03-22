@@ -24,7 +24,7 @@ def test_runPreprocessor(tb):
 
 def test_backend():
     subprocess.getstatusoutput("make run-preprocessor")
-    retcode, retstr = subprocess.getstatusoutput("make run-local-serial")
+    retcode, retstr = subprocess.getstatusoutput("time lmp < ../in.lammps")
     assert (retcode == 0)
     #mk1 = "Total # of neighbors"
     #mk2 = "Ave neighs/atom"
