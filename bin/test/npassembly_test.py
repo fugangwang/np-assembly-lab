@@ -23,10 +23,10 @@ def test_runPreprocessor(tb):
     os.remove(lammpsf)
 
 def test_backend():
-    retcode, retstr = subprocess.getstatusoutput("make run-preprocessor")
-    assert (retcode == 0)
-    #retcode, retstr = subprocess.getstatusoutput("time lmp < ../in.lammps")
-    #assert (retcode == 0)
+    retcode1, retstr = subprocess.getstatusoutput("make run-preprocessor")
+    assert (retcode1 == 0)
+    retcode2, retstr = subprocess.getstatusoutput("time lmp < ./in.lammps")
+    assert (retcode2 == 0)
     #mk1 = "Total # of neighbors"
     #mk2 = "Ave neighs/atom"
     #assert ((mk1 in runret) and (mk2 in runret))
