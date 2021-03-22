@@ -24,6 +24,6 @@ def test_runPreprocessor(tb):
 
 def test_backend():
     runret = subprocess.getoutput("make run-preprocessor && make run-local-serial")
-    mk1 = "Total # of neighbors"
-    mk2 = "Ave neighs/atom"
+    mk1 = "Loop time" #mk1 = "Total # of neighbors"
+    mk2 = "Performance" #mk2 = "Ave neighs/atom"
     assert ((mk1 in runret) and (mk2 in runret))
